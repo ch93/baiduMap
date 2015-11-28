@@ -67,6 +67,17 @@ public class StayPoint {
 		this.iArvT = iArvT;
 		this.iLevT = iLevT;
 	}
+	
+	public StayPoint(int userid, double lat, double lngt, Timestamp arvT,
+			Timestamp levT, double iArvT, double iLevT) {
+		this.userid = userid;
+		this.lat = lat;
+		this.lngt = lngt;
+		this.arvT = arvT;
+		this.levT = levT;
+		this.iArvT = iArvT;
+		this.iLevT = iLevT;
+	}
 
 	public int getUserid() {
 		return userid;

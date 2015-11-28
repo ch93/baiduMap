@@ -39,8 +39,9 @@ body,html {
 <!-- 鼠标测距 -->
 <script type="text/javascript"
 	src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
-
+	
 </head>
+
 <body>
 
 
@@ -64,7 +65,12 @@ body,html {
 				</div>
 
 				<button type="button" class="btn btn-default"
+					style="margin-top: 20px" onclick="CluseterResult();">聚类显示</button>
+
+				<button type="button" class="btn btn-default"
 					style="margin-top: 20px" onclick="DistanceMeasure();">鼠标测距</button>
+
+
 
 				<p id="outputGPS" style="margin-top: 20px"></p>
 				
@@ -236,6 +242,11 @@ body,html {
 	function DistanceMeasure(){
 		var myDis = new BMapLib.DistanceTool(map);
 		myDis.open();  //开启鼠标测距
+	}
+	
+	//聚类之后显示
+	function CluseterResult() {
+		
 	}
 	
 </script>

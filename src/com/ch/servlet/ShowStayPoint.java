@@ -1,5 +1,6 @@
 package com.ch.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -35,8 +36,16 @@ public class ShowStayPoint extends HttpServlet {
 		} else {
 			tempFileName = "" + userid;
 		}
+		
 		String path = MyConstant.filePath + "stayPointData/" + tempFileName +"/stayPoint.json";
-		String result = MTools.readFile(path);
+		String path1 = MyConstant.filePath + "stayPointData/" + tempFileName +"/clusteredStayPoint.json";
+		File file = new File(path1);
+		String result = "";
+		if (file.exists()) {
+			result = MTools.readFile(path1);
+		} else {
+			result = MTools.readFile(path);
+		}
 		if ("" == result) {
 			request.setAttribute("error", "there is no data in stayPoint collection");
 			request.getRequestDispatcher("error.jsp").forward(request, response);
