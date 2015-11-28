@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    
+	    <script type="text/javascript">
+/* 	var jArray = ${ gpsPoint };
+ 	for ( var i = 0; i < jArray.length; i++) {
+		document.writeln(jArray[i].lat + " " + jArray[i].lngt +"<br>");
+	}  */
+    /**
+     * 地球半径
+     */
+    var EARTHRADIUS = 6370996.81;
+    /**
+     * 将v值限定在a,b之间，经度使用
+     */
+    function _getLoop(v, a, b){
+        while( v > b){
+          v -= b - a
+        }
+        while(v < a){
+          v += b - a
+        }
+        return v;
+    }
+	
+    /**
+     * 将v值限定在a,b之间，纬度使用
+     */
+    function _getRange(v, a, b){
+        if(a != null){
+          v = Math.max(v, a);
+        }
+        if(b != null){
+          v = Math.min(v, b);
+        }
+        return v;
+    }
+    
+    function degreeToRad(degree){
+        return Math.PI * degree/180;    
+    }
+   
+       /**
+     * 计算两点之间的距离,两点坐标必须为经纬度
+     * @param {point1} Point 点对象
+     * @param {point2} Point 点对象
+     * @returns {Number} 两点之间距离，单位为米
+     */
+     function distance(point1lng, point1lat, point2lng, point2lat){
+
+
+        point1lng = _getLoop(point1lng, -180, 180);
+        point1lat = _getRange(point1lat, -74, 74);
+        point2lng = _getLoop(point2lng, -180, 180);
+        point2lat = _getRange(point2lat, -74, 74);
+        
+        var x1, x2, y1, y2;
+        x1 = degreeToRad(point1lng);
+        y1 = degreeToRad(point1lat);
+        x2 = degreeToRad(point2lng);
+        y2 = degreeToRad(point2lat);
+
+        return EARTHRADIUS * Math.acos((Math.sin(y1) * Math.sin(y2) + Math.cos(y1) * Math.cos(y2) * Math.cos(x2 - x1)));    
+    }
+     
+     document.write(distance(116.400,39.910,116.406,39.918).toFixed(2));
+    
+    
+    </script>
+
+
+  </body>
+</html>

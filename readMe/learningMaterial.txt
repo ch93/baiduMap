@@ -1,0 +1,31 @@
+
+
+===========================  百度地图    ================================================
+百度key： YuSnmKQatEna0Gr9oTcr6tF3
+
+Web服务API
+http://developer.baidu.com/map/index.php?title=webapi
+
+Place APIWeb服务API
+http://developer.baidu.com/map/index.php?title=webapi/guide/webservice-placeapi
+
+
+Geocoding APIWeb服务API
+http://developer.baidu.com/map/index.php?title=webapi/guide/webservice-geocoding
+
+eg:
+http://api.map.baidu.com/geocoder/v2/?ak=YuSnmKQatEna0Gr9oTcr6tF3&callback=renderReverse&location=40.00026940425533,116.32729625531914&output=json&pois=1
+
+
+
+baiduPOI
+https://www.juhe.cn/docs/api/id/10/aid/25
+
+http://lbs.juhe.cn/datab.php
+
+===========================  高德地图    ================================================
+高德地图  地理/逆地理编码  2000次/日
+http://lbs.amap.com/api/webservice/summary/
+
+高德地图POI类型导入数据库sql语句
+http://download.csdn.net/detail/wadecheri/8308825
