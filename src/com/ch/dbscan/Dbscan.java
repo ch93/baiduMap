@@ -41,7 +41,7 @@ public class Dbscan {
 	public static void main(String[] args) {
 		try {
 			// 调用DBSCAN的实现算法
-			String path = "D:\\Geolife Trajectories 1.3\\" + "stayPointData\\" + "004"
+			String path = "D:\\Geolife Trajectories 1.3\\" + "stayPointData\\" + "005"
 					+ "\\stayPoint.json";
 			applyDbscan(path);
 			Utility.display(resultList);
