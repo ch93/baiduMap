@@ -11,8 +11,12 @@ http://localhost:8080/baiduMap/ShowPoint?userid=0&fileName=20081026134407
 
 //显示GPS停留点
 userid=1 userid为用户名
-http://localhost:8080/baiduMap/ShowStayPoint?userid=3
+http://localhost:8080/baiduMap/ShowStayPoint?userid=4
 
+
+//显示聚类后的GPS停留点
+userid=1 userid为用户名
+http://localhost:8080/baiduMap/ShowClusteredStayPoint?userid=4
 
 
 

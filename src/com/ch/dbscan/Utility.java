@@ -14,7 +14,12 @@ import com.ch.util.MTools;
 import com.ch.util.MyConstant;
 
 public final class Utility {
-	// 计算两点之间的距离
+	/**
+	 * 计算p 、 q两点之间的距离
+	 * @param p
+	 * @param q
+	 * @return
+	 */
 	public static double getDistance(Point p, Point q) {
 //		double dx = p.getX() - q.getX();
 //		double dy = p.getY() - q.getY();
@@ -24,7 +29,14 @@ public final class Utility {
 		return distance;
 	}
 
-	// 检测p点是不是核心点，tmpLst存储核心点的直达点
+	/**
+	 * 检测p点是不是核心点，tmpLst存储核心点的直达点
+	 * @param lst 点列表
+	 * @param p 当前点
+	 * @param e ε半径
+	 * @param minp 密度阈值
+	 * @return
+	 */
 	public static List<Point> isKeyPoint(List<Point> lst, Point p, int e, int minp) {
 		int count = 0;
 		List<Point> tmpLst = new ArrayList<Point>();
@@ -44,7 +56,12 @@ public final class Utility {
 		return null;
 	}
 
-	// 合并两个链表，前提是b中的核心点包含在a中
+	/**
+	 * 合并两个链表，前提是b中的核心点包含在a中
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static boolean mergeList(List<Point> a, List<Point> b) {
 		boolean merge = false;
 		if (a == null || b == null) {
@@ -67,7 +84,12 @@ public final class Utility {
 		return merge;
 	}
 
-	// 获取文本中的样本点集合
+	/**
+	 *  获取文本中的样本点集合
+	 * @param filePath
+	 * @return
+	 * @throws IOException
+	 */
 	public static List<Point> getPointsList(String filePath) throws IOException {
 		List<Point> lst = new ArrayList<Point>();
 		// String txtPath =
@@ -101,7 +123,10 @@ public final class Utility {
 		return lst;
 	}
 
-	// 显示聚类的结果
+	/**
+	 * 显示聚类的结果
+	 * @param resultList
+	 */
 	public static void display(List<List<Point>> resultList) {
 		int index = 1;
 		for (Iterator<List<Point>> it = resultList.iterator(); it.hasNext();) {
@@ -126,9 +151,9 @@ public final class Utility {
 		if (resultList.size() < 1) {
 			return;
 		}
-
 		JSONArray jArray = new JSONArray();
 		int userid = 0;
+		int num = 0;
 		for (Iterator<List<Point>> it = resultList.iterator(); it.hasNext();) {
 			List<Point> lst = it.next();
 			if (lst.isEmpty()) {
@@ -137,17 +162,22 @@ public final class Utility {
 			userid = lst.get(0).getUserid();
 			for (Iterator<Point> it1 = lst.iterator(); it1.hasNext();) {
 				Point p = it1.next();
+				p.setClusterID(num);
 //				System.out.println(p.print());
 				jArray.put(p.toJson());
 			}
+			num++;
 		}
-		
+//		int userid = resultList.get(0).get(0).getUserid();
+//		int clusterNum = resultList.size();
 		JSONObject jObject = new JSONObject();
 		try {
 			jObject.put("userid", userid);
+			jObject.put("clusterNum", num);
 			jObject.put("stayPoint", jArray);
+			
 			//保存文件
-			MTools.writeFile(saveFilePath, jObject.toString());
+			MTools.writeFile(saveFilePath, jObject.toString(), true);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

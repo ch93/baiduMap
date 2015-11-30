@@ -132,6 +132,36 @@ public class MTools {
     }
     
     /**
+     * 写文件
+     * @param filePath
+     * @return
+     */
+    public  static void writeFile(String path, String content, boolean isOverWrite) {
+    	
+    	File file = new File(path);
+    	String folderPath = path.substring(0, path.lastIndexOf("\\"));
+        File folder =new File(folderPath);
+		  //如果文件夹不存在则创建  
+		  if  (!folder.exists() && !folder.isDirectory()) {
+		      System.out.println("创建目录： " + folderPath);
+		      folder.mkdirs();
+		  }
+        try {
+            file.createNewFile();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            // 文件写入
+            writer.write(content);
+//                writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    
+    
+    /**
      * 把JSON转化为GPSpointbean对象
      * @param json
      * @return

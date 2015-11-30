@@ -10,7 +10,7 @@
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
 
-<title>停留点显示</title>
+<title>聚类后停留点显示</title>
 
 <!-- <style type="text/css">
 body,html {
@@ -64,8 +64,8 @@ body,html {
 						
 				</div>
 
-<!-- 				<button type="button" class="btn btn-default"
-					style="margin-top: 20px" onclick="CluseterResult();">聚类显示</button> -->
+				<button type="button" class="btn btn-default"
+					style="margin-top: 20px" onclick="CluseterResult();">聚类显示</button>
 
 				<button type="button" class="btn btn-default"
 					style="margin-top: 20px" onclick="DistanceMeasure();">鼠标测距</button>
@@ -211,7 +211,7 @@ body,html {
 					var options = {
 							strokeColor : "red",
 							strokeWeight : 2,
-							strokeOpacity : 0.6
+							strokeOpacity : 0.4
 						}
  					var polyline = new BMap.Polyline(lpoints, options); //创建折线
 					map.addOverlay(polyline);
@@ -265,6 +265,7 @@ body,html {
 				tArray[xIndex][index] = jArray[i];
 				index++;
 			} else {
+			    tArray[xIndex][index++] = jArray[i];
 				index = 0;
 			}
 		}
@@ -283,6 +284,26 @@ body,html {
 					color : colors[int2%14]
 				}
 				var pointCollection = new BMap.PointCollection(points, options); // 初始化PointCollection
+							pointCollection.addEventListener('click', function(e) {
+				//有待优化，查看点详细信息
+				//alert("坐标为：" + e.point.lng + "," + e.point.lat); // 监听点击事件
+		          for (var int = 1; int < jArray.length - 1; int++) {
+						if (e.point.lng == jArray[int].lngt && e.point.lat == jArray[int].lat) {
+						
+							document.getElementById("outputGPS").innerHTML="坐标为\n" + e.point.lat + "," + e.point.lng;
+							alert(
+							        "聚类号：" + jArray[int].clusterID
+							        + "\n聚类号内的点数：" + tArray[jArray[int].clusterID].length
+							        +"\nID: " + int 
+									+ "\n坐标为：" + e.point.lng + " , " + e.point.lat 
+									+ "\n到达日期 ：" + jArray[int].arvT 
+									+ "\n离开日期 ：" + jArray[int].levT
+									+ "\n停留时间 ：" + Math.round((jArray[int].iLevT - jArray[int].iArvT)*24*60) + " min");  // 监听点击事件
+							
+							break;
+						}
+				   }
+			});
 				map.addOverlay(pointCollection); // 添加Overlay
 			}
 			

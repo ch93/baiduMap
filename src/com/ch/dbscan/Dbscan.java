@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.util.*;
 
 import com.ch.util.MyConstant;
-
+/**
+ * DBscan算法实现
+ * @author 
+ *
+ */
 public class Dbscan {
-	private final static int e = 200;// ε半径
-	private final static int minp = 5;// 密度阈值
-	private static List<Point> pointsList = new ArrayList<Point>();// 存储原始样本点
-	private static List<List<Point>> resultList = new ArrayList<List<Point>>();// 存储最后的聚类结果
+	private final static int e = 15;// ε半径
+	private final static int minp = 1;// 密度阈值
+	public  List<Point> pointsList = new ArrayList<Point>();// 存储原始样本点
+	public  List<List<Point>> resultList = new ArrayList<List<Point>>();// 存储最后的聚类结果
 
-	private static void applyDbscan(String path) throws IOException {
+	public  void applyDbscan(String path) throws IOException {
 		// String txtPath =
 		// "D:\\dev\\workspace_javaWeb\\baiduMap\\testData\\points.txt";
 
@@ -39,17 +43,42 @@ public class Dbscan {
 	}
 
 	public static void main(String[] args) {
-		try {
-			// 调用DBSCAN的实现算法
-			String path = "D:\\Geolife Trajectories 1.3\\" + "stayPointData\\" + "005"
-					+ "\\stayPoint.json";
-			applyDbscan(path);
-			Utility.display(resultList);
-			Utility.saveResult(resultList, path.replace("stayPoint.json", "clusteredStayPoint.json"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			// 调用DBSCAN的实现算法
+//			String path = "D:\\Geolife Trajectories 1.3\\" + "stayPointData\\" + "005"
+//					+ "\\stayPoint.json";
+//			applyDbscan(path);
+//			Utility.display(resultList);
+//			Utility.saveResult(resultList, path.replace("stayPoint.json", "clusteredStayPoint.json"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		for (int userid = 0; userid < 11; userid++) {
+//			String tempFileName = "";
+//			if (userid < 10) {
+//				tempFileName = "00" + userid;
+//			} else if (userid < 100) {
+//				tempFileName = "0" + userid;
+//			} else if (userid < 178){
+//				tempFileName = "" + userid;
+//			} else {
+//				tempFileName = "177";
+//			}
+//			try {
+//				// 调用DBSCAN的实现算法
+//				String path = "D:\\Geolife Trajectories 1.3\\" + "stayPointData\\" + tempFileName
+//						+ "\\stayPoint.json";
+//				applyDbscan(path);
+//				Utility.display(resultList);
+//				Utility.saveResult(resultList, path.replace("stayPoint.json", "clusteredStayPoint.json"));
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		}
 
 	}
 

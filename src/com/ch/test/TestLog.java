@@ -1,5 +1,6 @@
 package com.ch.test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -9,6 +10,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.RollingFileAppender;
 
 import com.ch.bean.FileAtrribute;
+import com.ch.dbscan.Dbscan;
+import com.ch.dbscan.Utility;
 import com.ch.loaddata.DataFromLogToJson;
 import com.ch.util.MTools;
 
@@ -35,7 +38,7 @@ public class TestLog {
 //		System.out.println(MTools.calcuDistance(116.33114309401, 39.991767378425, 116.3233315091, 39.991825424245));
 //		double ss = Math.abs(39747.5723032407 - 39747.5723611111);
 //		
-		System.out.println(40951%7);
+//		System.out.println(40951%7);
 		
 		
 		
@@ -46,8 +49,31 @@ public class TestLog {
 //        int threadCount = 5;
 //        List[] taskListPerThread = MTools.distributeTasks(filelist, threadCount);
 //		System.out.println(116);
-		
-		
-	}
+		for (int userid = 0; userid < 11; userid++) {
+			String tempFileName = "";
+			if (userid < 10) {
+				tempFileName = "00" + userid;
+			} else if (userid < 100) {
+				tempFileName = "0" + userid;
+			} else if (userid < 178){
+				tempFileName = "" + userid;
+			} else {
+				tempFileName = "177";
+			}
+			try {
+				// 调用DBSCAN的实现算法
+				String path = "D:\\Geolife Trajectories 1.3\\" + "stayPointData\\" + tempFileName
+						+ "\\stayPoint.json";
+				Dbscan dbscan = new Dbscan();
+				dbscan.applyDbscan(path);
+				Utility.display(dbscan.resultList);
+				Utility.saveResult(dbscan.resultList, path.replace("stayPoint.json", "clusteredStayPoint.json"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   }
 
+   }
 }
+
