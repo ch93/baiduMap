@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
@@ -13,6 +14,7 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 import org.apache.log4j.Logger;
 
 import com.ch.bean.GPSpoint;
+import com.ch.dbscan.Point;
 
 import sun.awt.SunHints.Value;
 
@@ -85,7 +87,7 @@ public class MyDataBase {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			log.error("SQLException ��ʾ " + e.getMessage());
+			log.error("SQLException " + e.getMessage());
 		}
 		return rsesult;
 	}
@@ -140,6 +142,45 @@ public class MyDataBase {
 //			e.printStackTrace();
 //		}
 		return rsesult;
+		
+	}
+	/**
+	 * 向ClusteredPoint表中插入数据
+	 * @param resultList 点数据
+	 */
+	public void insertClusteredPoint(List<List<Point>> resultList) {
+		String sql = "INSERT INTO clusteredPoint VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		try {
+			Connection con = ConnectionPool.getConnection();
+			con.setAutoCommit(false);
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			for (Iterator<List<Point>> it = resultList.iterator(); it.hasNext();) {
+				List<Point> lst = it.next();
+				if (lst.isEmpty()) {
+					continue;
+				}
+				for (Iterator<Point> it1 = lst.iterator(); it1.hasNext();) {
+					Point p = it1.next();
+					pstmt.setInt(1, p.getUserid());
+					pstmt.setDouble(2, p.getLat());
+					pstmt.setDouble(3, p.getLngt());
+					pstmt.setTimestamp(4, p.getArvT());
+					pstmt.setTimestamp(5, p.getLevT());
+					pstmt.setDouble(6, p.getiArvT());
+					pstmt.setDouble(7, p.getiLevT());
+					pstmt.setInt(8, p.getClusterID());
+					pstmt.setString(9, p.getPoiType());
+					pstmt.setString(10, p.getTag());
+					pstmt.addBatch();
+				}
+			}
+			pstmt.executeBatch();
+			con.commit();
+			ConnectionPool.release(con, pstmt);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

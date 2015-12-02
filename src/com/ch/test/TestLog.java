@@ -11,8 +11,11 @@ import org.apache.log4j.RollingFileAppender;
 
 import com.ch.bean.FileAtrribute;
 import com.ch.dbscan.Dbscan;
+import com.ch.dbscan.Point;
 import com.ch.dbscan.Utility;
 import com.ch.loaddata.DataFromLogToJson;
+import com.ch.loaddata.MyDataBase;
+import com.ch.module.Geocoding;
 import com.ch.util.MTools;
 
 public class TestLog {
@@ -49,7 +52,7 @@ public class TestLog {
 //        int threadCount = 5;
 //        List[] taskListPerThread = MTools.distributeTasks(filelist, threadCount);
 //		System.out.println(116);
-		for (int userid = 0; userid < 11; userid++) {
+		for (int userid = 7; userid < 182; userid++) {
 			String tempFileName = "";
 			if (userid < 10) {
 				tempFileName = "00" + userid;
@@ -67,7 +70,13 @@ public class TestLog {
 				Dbscan dbscan = new Dbscan();
 				dbscan.applyDbscan(path);
 				Utility.display(dbscan.resultList);
-				Utility.saveResult(dbscan.resultList, path.replace("stayPoint.json", "clusteredStayPoint.json"));
+				
+//				Utility.saveResult(dbscan.resultList, path.replace("stayPoint.json", "clusteredStayPoint.json"));
+				Geocoding geocoding = new Geocoding();
+				List<List<Point>> resultList = geocoding.lableThePOI(dbscan.resultList);
+				MyDataBase dataBase = new MyDataBase();
+				dataBase.insertClusteredPoint(resultList);
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

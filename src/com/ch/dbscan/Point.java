@@ -14,6 +14,14 @@ public class Point extends StayPoint {
 	private int clusterID;
 	private boolean isKey;
 	private boolean isClassed;
+	/**
+	 * POI类型
+	 */
+	private String poiType;
+	/**
+	 * POI详细说明
+	 */
+	private String tag;
 
 	public Point(int userid, double lat, double lngt, Timestamp arvT,
 			Timestamp levT, double iArvT, double iLevT) {
@@ -63,12 +71,30 @@ public class Point extends StayPoint {
 	public void setClusterID(int clusterID) {
 		this.clusterID = clusterID;
 	}
+	
+	
 
 //	public Point(String str) {
 //		String[] p = str.split(",");
 //		this.x = Integer.parseInt(p[0]);
 //		this.y = Integer.parseInt(p[1]);
 //	}
+
+	public String getPoiType() {
+		return poiType;
+	}
+
+	public void setPoiType(String poiType) {
+		this.poiType = poiType;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
 	public String print() {
 		return  + this.getLat() + " , " + this.getLngt() + " , " + this.getArvT() + " , " + this.getLevT();
