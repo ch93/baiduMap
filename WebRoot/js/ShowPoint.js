@@ -97,10 +97,12 @@
 		myDis.open();  //开启鼠标测距
 	}
 	
-	function dsdsa() {
-		$.getJSON()
+
+	function getValue() {
+	    $.get("/ShowClusteredStayPoint",function(data, status){
+			alert("Data: " + data + "\nStatus: " + status);
+		} );
 	}
-	
 	
 	
 	

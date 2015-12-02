@@ -14,7 +14,7 @@ Geocoding APIWeb服务API
 http://developer.baidu.com/map/index.php?title=webapi/guide/webservice-geocoding
 
 eg:
-http://api.map.baidu.com/geocoder/v2/?ak=YuSnmKQatEna0Gr9oTcr6tF3&callback=renderReverse&location=40.00026940425533,116.32729625531914&output=json&pois=1
+http://api.map.baidu.com/geocoder/v2/?ak=YuSnmKQatEna0Gr9oTcr6tF3&location=40.00026940425533,116.32729625531914&output=json&pois=1
 
 
 

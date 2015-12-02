@@ -249,7 +249,9 @@ body,html {
 	//聚类之后显示
 	function CluseterResult() {
 		
-		var tArray = new Array();   //先声明一维
+		
+		
+		/* var tArray = new Array();   //先声明一维
         for(var k=0; k<clusterNum; k++){      //一维长度为i,i为变量，可以根据实际情况改变
 			tArray[k]=new Array();    //声明二维，每一个一维数组里面的一个元素都是一个数组；
 		}
@@ -291,7 +293,8 @@ body,html {
 			map.panTo(new BMap.Point(jArray[0].lngt, jArray[0].lat));
 		} else {
 			alert("请在chrome、safari、IE8+以上浏览器查看本示例");
-		}
+		} */
+		
 	}
 	
 </script>

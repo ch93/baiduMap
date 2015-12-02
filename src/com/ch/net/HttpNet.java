@@ -25,6 +25,12 @@ public class HttpNet {
 	
 	HttpResponse response = null;
 	
+	private String URLPath = "";
+	
+	public String getURLPath() {
+		return URLPath;
+	}
+
 	public HttpNet() {
 		this.httpClient = HttpClients.createDefault();
 	}
@@ -33,6 +39,7 @@ public class HttpNet {
 	public String doPost(String url, List<NameValuePair> params) {
 		String result = null;
 		HttpPost httpPost = new HttpPost(url);
+		URLPath = httpPost.getURI().getPath();
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(params));
 			response = httpClient.execute(httpPost);
@@ -54,5 +61,7 @@ public class HttpNet {
 		}
 		return result;
 	}
+	
+	
 
 }
