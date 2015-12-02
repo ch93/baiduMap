@@ -248,6 +248,11 @@ body,html {
 	//聚类之后显示
 	function CluseterResult() {
 		
+/*  		$.get("/baiduMap/Test",function(data, status){
+			alert("Data: " + data + "\nStatus: " + status);
+		}); */
+		
+		
 		var tArray = new Array();   //先声明一维
         for(var k=0; k<clusterNum; k++){      //一维长度为i,i为变量，可以根据实际情况改变
 			tArray[k]=new Array();    //声明二维，每一个一维数组里面的一个元素都是一个数组；
@@ -282,6 +287,9 @@ body,html {
 					size : 3,
 					shape : BMAP_POINT_SHAPE_CIRCLE,
 					color : colors[int2%14]
+				}
+				if ( points.length < 3) {
+					continue;
 				}
 				var pointCollection = new BMap.PointCollection(points, options); // 初始化PointCollection
 							pointCollection.addEventListener('click', function(e) {

@@ -15,5 +15,9 @@ public class MyConstant {
 	 * 停留点提取时间阈值 20分钟
 	 */
 	public static int TimeThreshold = 20;
+	/**
+	 * 百度地图API key
+	 */
+	public static String MyBaiduKey = "YuSnmKQatEna0Gr9oTcr6tF3";
 	
 }
