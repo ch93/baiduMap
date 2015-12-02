@@ -12,7 +12,7 @@
 	
 	
 	//获取后台的数据
-	var jArray = ${ gpsPoint };
+	//var jArray = ${ gpsPoint };
 	//jArray = jArray.stayPoint;
 	var points = [];  // 添加海量点数据
 	for (var i = 0; i < jArray.length; i++) {
@@ -96,6 +96,11 @@
 		var myDis = new BMapLib.DistanceTool(map);
 		myDis.open();  //开启鼠标测距
 	}
+	
+	function dsdsa() {
+		$.getJSON()
+	}
+	
 	
 	
 	

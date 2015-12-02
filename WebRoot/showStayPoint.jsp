@@ -191,6 +191,7 @@ body,html {
 			//var temp;
 			var tempi = i;
 				for (; j < jArray.length; j++) {
+					//判断是否为同一天
 					if (Math.abs(Math.floor(jArray[j].iArvT) - Math.floor(jArray[i].iArvT) ) >= 1) {
 						//temp = j;
 						i = j-1;
