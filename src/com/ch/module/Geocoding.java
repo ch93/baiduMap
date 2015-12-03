@@ -45,14 +45,40 @@ public class Geocoding {
 			int status = jObject.getInt("status");
 			if (status == 0) { //坐标转换成功
 				JSONArray jArray = jObject.getJSONObject("result").getJSONArray("pois");
+				//具体地址
+				String addr = jObject.getJSONObject("result").getString("formatted_address");
 				if (jArray.length() > 0) {
-					JSONObject jObject1 = jArray.getJSONObject(0);
-					String poiType = jObject1.getString("poiType");
-					String tag = jObject1.getString("tag");
-					if (!"".equals(poiType) && !"".equals(tag)) {
-						result = poiType+"|"+tag;
-					} else {
-						//待提高
+					
+//					JSONObject jObject1 = jArray.getJSONObject(0);
+//					String poiType = jObject1.getString("poiType");
+//					String tag = jObject1.getString("tag");
+//					//距离GPS点的距离
+//					int distance = jObject1.getInt("distance");
+//					
+//					if (!"".equals(poiType) && !"".equals(tag)) {
+//						result = poiType+"|"+tag;
+//					} else {
+//						//待提高
+//						
+//					}
+					
+					for (int i = 0; i < jArray.length(); i++) {
+						JSONObject jObject1 = jArray.getJSONObject(i);
+						String poiType = jObject1.getString("poiType");
+						String tag = jObject1.getString("tag");
+						//距离GPS点的距离
+						int distance = jObject1.getInt("distance");
+						if (!"".equals(poiType) && !"".equals(tag)) {
+							if (!poiType.equals(tag)) {
+								result = poiType+"|"+tag;
+								break;
+							}
+							if (distance >= 100) {
+								result = poiType+"|"+tag;
+								break;
+							}
+							
+					    }
 						
 					}
 //					System.out.println(tag);

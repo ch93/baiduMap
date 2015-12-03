@@ -52,7 +52,7 @@ public class TestLog {
 //        int threadCount = 5;
 //        List[] taskListPerThread = MTools.distributeTasks(filelist, threadCount);
 //		System.out.println(116);
-		for (int userid = 7; userid < 182; userid++) {
+		for (int userid = 0; userid < 5; userid++) {
 			String tempFileName = "";
 			if (userid < 10) {
 				tempFileName = "00" + userid;
