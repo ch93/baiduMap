@@ -20,6 +20,10 @@ public class Dbscan {
 		// "D:\\dev\\workspace_javaWeb\\baiduMap\\testData\\points.txt";
 
 		pointsList = Utility.getPointsList(path);
+		if (pointsList.size() == 0) {
+			resultList.clear();
+			return;
+		}
 		for (int index = 0; index < pointsList.size(); ++index) {
 			List<Point> tmpLst = new ArrayList<Point>();
 			Point p = pointsList.get(index);

@@ -74,7 +74,14 @@ public class Geocoding {
 								break;
 							}
 							if (distance >= 100) {
-								result = poiType+"|"+tag;
+								if (i > 0) {
+									JSONObject jObject2 = jArray.getJSONObject(i-1);
+									String poiType2 = jObject2.getString("poiType");
+									String tag2 = jObject2.getString("tag");
+									result = poiType2+"|"+tag2;
+								} else {
+									result = poiType+"|"+tag;
+								}
 								break;
 							}
 							
@@ -118,12 +125,12 @@ public class Geocoding {
 			}
 			
 			System.out.println("-----第" + index + "个聚类-----");
+			System.out.println(result);
 			for (Iterator<Point> it1 = lst.iterator(); it1.hasNext();) {
 				Point p = it1.next();
 				p.setClusterID(index);
 				if (result.contains("|")) {
 					String[] poiType = result.split("\\|");
-					System.out.println(result);
 					p.setPoiType(poiType[0]);
 					p.setTag(poiType[1]);
 				}

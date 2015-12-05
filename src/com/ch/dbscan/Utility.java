@@ -102,6 +102,10 @@ public final class Utility {
 //		br.close();
 		String result = MTools.readFile(filePath);
 		try {
+			if ("".equals(result)) {
+				lst.clear();
+				return lst;
+			}
 			JSONObject jObject = new JSONObject(result);
 			int userid = jObject.getInt("userid");
 			JSONArray jArray = jObject.getJSONArray("stayPoint");
@@ -134,10 +138,10 @@ public final class Utility {
 			if (lst.isEmpty()) {
 				continue;
 			}
-			System.out.println("-----第" + index + "个聚类-----");
+//			System.out.println("-----第" + index + "个聚类-----");
 			for (Iterator<Point> it1 = lst.iterator(); it1.hasNext();) {
 				Point p = it1.next();
-				System.out.println(p.print());
+//				System.out.println(p.print());
 			}
 			index++;
 		}
